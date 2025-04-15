@@ -1,4 +1,5 @@
 name: Deploy Laravel Application
+
 on:
   push:
     branches:
@@ -9,28 +10,43 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # ✅ Haal de code binnen
     - name: Checkout Code
       uses: actions/checkout@v3
 
+    # ✅ PHP 8.3 installeren
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
         php-version: 8.3
 
+    # ✅ Composer dependencies installeren
     - name: Install Composer Dependencies
       run: composer install --optimize-autoloader --no-dev --no-progress --no-interaction --prefer-dist
 
-    - name: Install Node
+    # ✅ Node installeren
+    - name: Setup Node
       uses: actions/setup-node@v3
       with:
         node-version: '22.14.0'
 
+    # ✅ NPM dependencies installeren
     - name: Install NPM Dependencies
       run: npm install
 
+    # ✅ Assets bouwen
     - name: Build NPM Assets
       run: npm run build
 
+    # ✅ Zet correcte permissies voor SSH key
+    - name: Fix SSH Permissions
+      run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/deploy_key
+        chmod 600 ~/.ssh/deploy_key
+
+    # ✅ Synchroniseer bestanden naar de server via rsync + SSH
     - name: Synchronize Files To Server
       uses: easingthemes/ssh-deploy@v2.1.5
       env:
@@ -39,8 +55,11 @@ jobs:
         REMOTE_HOST: ${{ secrets.VPS_HOST }}
         REMOTE_USER: ${{ secrets.VPS_USER }}
         TARGET: "/var/www/html/ndrixmusic"
+        ARGS: "-rltgoDzvO --delete"
+        VERBOSE: true
 
-    - name: Run Remote/Artisan Commands
+    # ✅ Voer artisan commands uit op de server
+    - name: Run Remote Artisan Commands
       uses: appleboy/ssh-action@v0.1.6
       with:
         host: ${{ secrets.VPS_HOST }}
