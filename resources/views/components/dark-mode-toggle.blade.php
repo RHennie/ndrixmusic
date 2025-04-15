@@ -3,11 +3,6 @@
 </button>
 
 <script>
-    // Check for dark mode preference from localStorage
-    if (localStorage.getItem('theme') === 'dark') {
-        document.documentElement.classList.add('dark');
-    }
-
     // Dark mode toggle script
     document.addEventListener('DOMContentLoaded', () => {
         const toggleButton = document.getElementById('darkModeToggle');
