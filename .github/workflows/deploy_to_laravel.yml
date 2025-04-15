@@ -38,7 +38,7 @@ jobs:
         SOURCE: "."
         REMOTE_HOST: ${{ secrets.VPS_HOST }}
         REMOTE_USER: ${{ secrets.VPS_USER }}
-        TARGET: "/var/www/html/glennraya.com"
+        TARGET: "/var/www/html/ndrixmusic"
 
     - name: Run Remote/Artisan Commands
       uses: appleboy/ssh-action@v0.1.6
