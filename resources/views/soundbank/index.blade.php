@@ -37,6 +37,7 @@
                                 </form>
                             </div>
 
+                            
                             <div class="relative">
                                 <audio id="audio-{{ $loop->index }}" preload="metadata" class="w-full custom-audio">
                                     <source src="{{ Storage::url($file) }}" type="audio/mpeg">
