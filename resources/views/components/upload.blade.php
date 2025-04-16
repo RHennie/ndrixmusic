@@ -2,7 +2,7 @@
     @csrf
 
     <!-- Hidden File Input -->
-    <input id="file-input" type="file" name="audio" required class="hidden" accept=".mp3,.wav">
+    <input id="file-input" type="file" name="audio" required class="sr-only" accept=".mp3,.wav">
 
     <!-- Custom Drag & Drop Box -->
     <div id="drag-area" class="w-full h-40 border-2 border-dashed border-gray-500 dark:border-gray-700 rounded-md p-4 text-center flex justify-center items-center cursor-pointer bg-gray-100 dark:bg-gray-900 transition-colors duration-300 hover:bg-gray-200 dark:hover:bg-gray-700">
