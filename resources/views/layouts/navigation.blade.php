@@ -98,7 +98,7 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
-            <x-responsive-nav-link :href="route('test')" :active="request()->routeIs('test')">
+            <x-responsive-nav-link :href="route('soundbank.index')" :active="request()->routeIs('soundbank.index')">
                 {{ __('Soundbank') }}
             </x-responsive-nav-link>
         </div>
