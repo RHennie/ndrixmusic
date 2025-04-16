@@ -15,6 +15,9 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('test')" :active="request()->routeIs('test')">
+                        {{ __('Soundbank') }}
+                    </x-nav-link>
                 </div>
             </div>
 
@@ -59,9 +62,6 @@
                 <!-- Desktop Login/Register -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
                     <a href="{{ route('login') }}" class="text-sm text-white hover:underline">Log in</a>
-                    @if (Route::has('register'))
-                        <a href="{{ route('register') }}" class="text-sm text-white hover:underline">Register</a>
-                    @endif
                 </div>
                 @endguest
             </div>
@@ -95,6 +95,9 @@
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+            <x-responsive-nav-link :href="route('test')" :active="request()->routeIs('test')">
+                {{ __('Soundbank') }}
             </x-responsive-nav-link>
         </div>
 
