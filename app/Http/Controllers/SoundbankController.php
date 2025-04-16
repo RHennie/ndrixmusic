@@ -18,7 +18,7 @@ class SoundbankController extends Controller
     public function upload(Request $request)
     {
         $request->validate([
-            'audio' => 'required|mimes:mp3,wav,ogg|max:10240',
+            'audio' => 'required|mimes:mp3,wav|max:10240',
         ]);
 
         $file = $request->file('audio');
