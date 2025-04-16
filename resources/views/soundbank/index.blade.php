@@ -1,7 +1,7 @@
 <x-app-layout>
     <div class="flex items-center justify-center w-full transition-opacity opacity-100 duration-750 lg:grow starting:opacity-0">
         <main class="flex justify-center p-6">
-            <div class="w-full max-w-4xl rounded-2xl shadow-xl p-6 space-y-6 bg-white dark:bg-gray-950 transition-colors duration-300">
+            <div class="w-full max-w-4xl rounded-2xl shadow-xl p-6 space-y-6 bg-white dark:bg-gray-800 transition-colors duration-300">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">
                     🎵 Soundbank
                 </h2>
@@ -33,15 +33,35 @@
                                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">{{ $filename }}</h3>
                                 </div>
                             </div>
-                            <div>
-                                <audio controls preload="metadata" class="w-full custom-audio">
+
+                            <div class="relative">
+                                <audio id="audio-{{ $loop->index }}" preload="metadata" class="w-full custom-audio">
                                     <source src="{{ Storage::url($file) }}" type="audio/mpeg">
                                     Your browser does not support the audio element.
                                 </audio>
+
+                                <div class="flex items-center justify-between mt-2">
+                                    <!-- Play/Pause Button -->
+                                    <button class="play-btn rounded-full w-12 h-12 flex items-center justify-center p-0 transition-all duration-300">
+                                        <!-- Play Icon -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon-play text-red-600" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M5 3v18l15-9-15-9z" />
+                                        </svg>
+                                        <!-- Pause Icon (hidden by default) -->
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 icon-pause text-red-600 hidden" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M6 4h4v16H6zm8 0h4v16h-4z" />
+                                        </svg>
+                                    </button>
+
+
+                                    <!-- Slider -->
+                                    <input type="range" class="seek-slider w-full ml-4 accent-red-600" min="0" max="100" value="0">
+                                </div>
                             </div>
+
                             <div class="mt-2">
                                 <a href="{{ Storage::url($file) }}" download class="text-red-500 hover:underline text-sm">
-                                    ⬇️ Download
+                                    Download
                                 </a>
                             </div>
                         </div>
@@ -51,28 +71,64 @@
         </main>
     </div>
 
-    <style>
-        /* Minimalist custom audio styling */
-        audio::-webkit-media-controls-panel {
-            background-color: transparent;
-        }
-
-        audio::-webkit-media-controls-play-button,
-        audio::-webkit-media-controls-timeline,
-        audio::-webkit-media-controls-current-time-display,
-        audio::-webkit-media-controls-time-remaining-display {
-            filter: invert(0%) brightness(0.8);
-        }
-
-        html.dark audio::-webkit-media-controls-play-button,
-        html.dark audio::-webkit-media-controls-timeline,
-        html.dark audio::-webkit-media-controls-current-time-display,
-        html.dark audio::-webkit-media-controls-time-remaining-display {
-            filter: invert(100%);
-        }
-    </style>
-
     <script>
+        document.querySelectorAll('.song-block').forEach((block, index) => {
+            const audio = document.getElementById(`audio-${index}`);
+            const playBtn = block.querySelector('.play-btn');
+            const iconPlay = block.querySelector('.icon-play');
+            const iconPause = block.querySelector('.icon-pause');
+            const slider = block.querySelector('.seek-slider');
+            let isDragging = false;
+
+            playBtn.addEventListener('click', () => {
+                const isPlaying = !audio.paused;
+
+                document.querySelectorAll('audio').forEach(a => {
+                    if (a !== audio) {
+                        a.pause();
+                        const otherBlock = a.closest('.song-block');
+                        otherBlock.querySelector('.icon-play').classList.remove('hidden');
+                        otherBlock.querySelector('.icon-pause').classList.add('hidden');
+                    }
+                });
+
+                if (isPlaying) {
+                    audio.pause();
+                } else {
+                    audio.play();
+                }
+
+                iconPlay.classList.toggle('hidden', !audio.paused);
+                iconPause.classList.toggle('hidden', audio.paused);
+            });
+
+            // Update slider position
+            audio.addEventListener('timeupdate', () => {
+                if (!isDragging && audio.duration) {
+                    slider.value = (audio.currentTime / audio.duration) * 100;
+                }
+            });
+
+            // Seeking
+            slider.addEventListener('input', () => {
+                isDragging = true;
+            });
+
+            slider.addEventListener('change', () => {
+                if (audio.duration) {
+                    audio.currentTime = (slider.value / 100) * audio.duration;
+                }
+                isDragging = false;
+            });
+
+            // Reset after end
+            audio.addEventListener('ended', () => {
+                iconPlay.classList.remove('hidden');
+                iconPause.classList.add('hidden');
+                slider.value = 0;
+            });
+        });
+
         // Search filter
         document.getElementById('search').addEventListener('input', function () {
             const query = this.value.toLowerCase();
