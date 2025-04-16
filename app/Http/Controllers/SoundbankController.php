@@ -32,8 +32,8 @@ class SoundbankController extends Controller
 
     public function delete($file)
     {
+        $file = str_replace('+', ' ', $file);
         $filePath = 'soundbank/' . $file;
-    
         if (Storage::disk('public')->exists($filePath)) {
             Storage::disk('public')->delete($filePath);
             return back()->with('success', "$file deleted.");

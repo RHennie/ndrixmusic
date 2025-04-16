@@ -61,7 +61,7 @@
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div id="deleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+    <div id="deleteModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm flex    items-center justify-center z-50 hidden">
         <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 w-11/12 max-w-md space-y-4 transition-all duration-300">
             <h2 class="text-xl font-semibold text-gray-900 dark:text-white">Delete File</h2>
             <p class="text-gray-700 dark:text-gray-300">Are you sure you want to delete this file? This action cannot be undone.</p>
@@ -78,5 +78,5 @@
     </div>
 
     <x-soundbank-scripts/>
-    
+
 </x-app-layout>
