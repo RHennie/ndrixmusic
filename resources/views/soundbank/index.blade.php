@@ -3,7 +3,7 @@
         <main class="flex justify-center p-6">
             <div class="w-full max-w-4xl rounded-2xl shadow-xl p-6 space-y-6 bg-white dark:bg-gray-800 transition-colors duration-300">
                 <h2 class="text-3xl font-bold text-gray-900 dark:text-white border-b border-gray-200 dark:border-gray-800 pb-4">
-                    🎵 Soundbank
+                    Soundbank
                 </h2>
 
                 @if (session('success'))
