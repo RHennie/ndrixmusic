@@ -4,9 +4,9 @@
         <div class="flex justify-between h-16">
             <div class="flex flex-1 items-center">
                 <!-- Logo -->
-                <div class="shrink-0 flex items-center mr-8 lg:mr-0">
+                <div class="shrink-0 flex items-center pt-1 mr-8 lg:mr-0">
                     <a href="{{ route('index') }}">
-                        <x-application-logo class="block h-16 w-auto fill-current text-gray-200 hover:text-gray-800 dark:text-gray-800 dark:hover:text-gray-200" />
+                        <x-application-logo class="block h-16 w-auto transform transition-all duration-300 hover:-rotate-3 hover:scale-110 fill-current text-gray-200 hover:text-gray-800 dark:text-gray-800 dark:hover:text-gray-200" />
                     </a>
                 </div>
 
