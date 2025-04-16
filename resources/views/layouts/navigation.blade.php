@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center mr-8 lg:mr-0">
                     <a href="{{ route('index') }}">
-                        <x-application-logo class="block h-9 w-auto fill-current text-white dark:text-white" />
+                        <x-application-logo class="block h-16 w-auto fill-current text-white dark:text-white" />
                     </a>
                 </div>
 
@@ -61,7 +61,9 @@
                 @guest
                 <!-- Desktop Login/Register -->
                 <div class="hidden sm:flex sm:items-center sm:ms-6 space-x-4">
-                    <a href="{{ route('login') }}" class="text-sm text-white hover:underline">Log in</a>
+                    <x-nav-link :href="route('login')" :active="request()->routeIs('login')">
+                        {{ __('Log in') }}
+                    </x-nav-link>
                 </div>
                 @endguest
             </div>
