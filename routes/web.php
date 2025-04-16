@@ -19,6 +19,8 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function ()  {
     Route::get('/soundbank', [SoundbankController::class, 'index'])->name('soundbank.index');
     Route::post('/soundbank/upload', [SoundbankController::class, 'upload'])->name('soundbank.upload');
+    Route::delete('/soundbank/delete/{file}', [SoundbankController::class, 'delete'])->name('soundbank.delete');
+
 });
 
 Route::middleware('auth')->group(function ()  {

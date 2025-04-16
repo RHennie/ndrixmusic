@@ -29,4 +29,15 @@ class SoundbankController extends Controller
 
         return redirect()->route('soundbank.index')->with('success', 'Upload successful!');
     }
+
+    public function delete($file)
+    {
+        $filePath = 'soundbank/' . $file;
+    
+        if (Storage::disk('public')->exists($filePath)) {
+            Storage::disk('public')->delete($filePath);
+            return back()->with('success', "$file deleted.");
+        }
+        return back()->with('error', "$file not found.");
+    }
 }

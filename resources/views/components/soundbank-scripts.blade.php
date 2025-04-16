@@ -64,4 +64,36 @@
             block.style.display = block.dataset.name.toLowerCase().includes(query) ? 'block' : 'none';
         });
     });
+
+    function confirmDelete(e) {
+        if (!confirm("Are you sure you want to delete this file?")) {
+            e.preventDefault();
+            return false;
+        }
+        return true;
+    }
+    let formToDelete = null;
+
+    function showDeleteModal(form) {
+        formToDelete = form;
+        document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    function closeDeleteModal() {
+        document.getElementById('deleteModal').classList.add('hidden');
+        formToDelete = null;
+    }
+
+    document.getElementById('confirmDeleteBtn').addEventListener('click', function () {
+        if (formToDelete) {
+            formToDelete.submit();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === "Escape") {
+            closeDeleteModal();
+        }
+    });
+    
 </script>
