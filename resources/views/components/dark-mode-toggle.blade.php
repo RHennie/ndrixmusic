@@ -1,10 +1,16 @@
 <div 
-    x-data="{ darkMode: localStorage.getItem('darkMode') === 'true' }" 
+    x-data="{ 
+        darkMode: localStorage.getItem('theme') === 'dark' 
+    }" 
     x-init="document.documentElement.classList.toggle('dark', darkMode)" 
     class="flex items-center justify-center"
 >
     <button 
-        @click="darkMode = !darkMode; localStorage.setItem('darkMode', darkMode); document.documentElement.classList.toggle('dark', darkMode)" 
+        @click="
+            darkMode = !darkMode; 
+            localStorage.setItem('theme', darkMode ? 'dark' : 'light'); 
+            document.documentElement.classList.toggle('dark', darkMode)
+        " 
         class="w-10 h-10 rounded-full bg-white dark:bg-gray-800 shadow-md flex items-center justify-center transition-all duration-500 ease-in-out hover:scale-105" 
         aria-label="Toggle Dark Mode"
     >
@@ -37,17 +43,3 @@
         </svg>
     </button>
 </div>
-
-
-<script>
-    // Dark mode toggle script
-    document.addEventListener('DOMContentLoaded', () => {
-        const toggleButton = document.getElementById('darkModeToggle');
-        if (toggleButton) {
-            toggleButton.addEventListener('click', () => {
-                const isDark = document.documentElement.classList.toggle('dark');
-                localStorage.setItem('theme', isDark ? 'dark' : 'light');
-            });
-        }
-    });
-</script>
