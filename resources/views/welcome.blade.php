@@ -18,26 +18,7 @@
                     <div class="rounded overflow-hidden">
                         <!-- Spotify embed -->
                         <iframe style="border-radius:12px" 
-                            src="https://open.spotify.com/embed/track/5Z01UMMf7V1o0MzF86s6WJ?utm_source=generator" 
-                            width="100%" height="80" frameBorder="0" 
-                            allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
-                            loading="lazy"></iframe>
-                    </div>
-                </div>
-
-                <!-- Another Card -->
-                <div class="rounded-xl p-4 shadow flex flex-col gap-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-300">
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Echoes in the Dark</h3>
-                            <p class="text-sm text-gray-600 dark:text-gray-400">by Luna Waves · Ambient</p>
-                        </div>
-                        <span class="text-sm text-gray-500 dark:text-gray-400">April 8, 2025</span>
-                    </div>
-                    <div class="rounded overflow-hidden">
-                        <!-- Another Spotify embed -->
-                        <iframe style="border-radius:12px" 
-                            src="https://open.spotify.com/embed/track/0VjIjW4GlUZAMYd2vXMi3b?utm_source=generator" 
+                            src="https://open.spotify.com/embed/album/7ibbBLWc8GLHug6qt08lck?utm_source=generator" 
                             width="100%" height="80" frameBorder="0" 
                             allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" 
                             loading="lazy"></iframe>
